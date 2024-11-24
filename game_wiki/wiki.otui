@@ -1,0 +1,168 @@
+WikiItemBox < ScrollablePanel
+  border-width: 1
+  border-color: #000000
+  color: #aaaaaa
+  text-align: center
+  text-offset: 0 30
+
+  Item
+    id: item
+    phantom: true
+    anchors.top: parent.top
+    anchors.horizontalCenter: parent.horizontalCenter
+    image-color: #ffffffff
+    margin-top: 3
+
+  $checked on:
+    border-color: #ffffff
+
+  $!checked:
+    border-color: #000000
+
+  $!on:
+    image-color: #ffffff88
+    color: #aaaaaa88
+
+ExtrasItem < Panel
+  id: extrasItem
+  height: 34
+  margin-top: 7
+  margin-left: 25
+  margin-right: 25
+
+  UIWidget
+    id: text
+    anchors.left: parent.left
+    anchors.verticalCenter: next.verticalCenter
+
+  BotItem
+    id: item
+    anchors.top: parent.top
+    anchors.right: parent.right
+
+MainWindow
+  id: wikiWindow
+  !text: tr('Welcome to Rookgaard Wiki!')
+  width: 720
+  height: 480
+  padding: 10
+  @onEscape: modules.game_wiki.toggleWindow()
+
+  TabButton
+    id: itemData
+    !text: tr('Items')
+    on: false
+    anchors.top: motdPanel.bottom
+    anchors.left: parent.left
+    margin-top: 15
+    width: 120
+    height: 40
+  
+  TabButton
+    id: npcData
+    !text: tr('Npcs')
+    on: false
+    anchors.top: itemData.bottom
+    anchors.left: parent.left
+    margin-top: 10
+    width: 120
+    height: 40
+    
+  TabButton
+    id: mobData
+    !text: tr('Monsters')
+    on: false
+    anchors.top: npcData.bottom
+    anchors.left: parent.left
+    margin-top: 10
+    width: 120
+    height: 40
+      
+  FlatPanel
+    id: motdPanel
+    anchors.left: parent.left
+    anchors.top: parent.top
+    width: 120
+    height: 120
+    margin-top: 15
+    
+    Label
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.top: parent.top
+      text: "Monster"
+      margin-top: -5
+      font: verdana-11px-rounded
+      color: #fc5203
+      
+    Label
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.bottom: parent.bottom
+      text: "Of the Day"
+      margin-bottom: -5
+      font: verdana-11px-rounded
+      color: #fc5203
+    
+    UICreature
+      id: motdCreature
+      anchors.centerIn: parent
+      size: 96 96
+      margin-right: 16
+      margin-bottom: 16
+      outfit-shader: outfit_default
+
+    Label
+      id: motdName
+      anchors.horizontalCenter: parent.horizontalCenter
+      anchors.bottom: parent.bottom
+      margin-bottom: 15
+      font: verdana-11px-rounded
+      color: #ffffff
+      horizontalAlignment: Text.AlignHCenter
+
+  FlatPanel
+    id: dataFlatPanel
+    width: 570
+    anchors.top: parent.top
+    anchors.bottom: bottomSep.top
+    anchors.right: parent.right
+    margin-top: 15
+    
+  VerticalScrollBar
+    id: dataPanelScroll
+    anchors.top: parent.top
+    anchors.bottom: bottomSep.top
+    anchors.right: parent.right
+    margin-top: 15
+    step: 24
+    pixels-scroll: true
+      
+  ScrollablePanel
+    id: dataPanel
+    width: 570
+    margin-top: 15
+    anchors.top: parent.top
+    anchors.bottom: bottomSep.top
+    anchors.right: parent.right
+    vertical-scrollbar: dataPanelScroll
+    layout:
+      type: grid
+      cell-size: 102 90
+      flow: true
+      auto-spacing: true
+  
+  HorizontalSeparator
+    id: bottomSep
+    anchors.right: parent.right
+    anchors.left: parent.left
+    anchors.bottom: closeButton.top
+    margin-bottom: 8    
+
+  Button
+    id: closeButton
+    !text: tr('Close')
+    font: cipsoftFont
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    color: #ffffff
+    size: 45 21
+    @onClick: modules.game_wiki.toggleWindow()

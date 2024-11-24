@@ -1,0 +1,9 @@
+Module
+  name: game_wiki
+  description: Rookgaard.pl Wiki
+  author: rookgaard community
+  sandboxed: true
+  scripts: [ wiki ]
+  version: 1.0
+  @onLoad: init()
+  @onUnload: terminate()
