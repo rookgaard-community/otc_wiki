@@ -4,6 +4,8 @@ WikiItemBox < ScrollablePanel
   color: #aaaaaa
   text-align: center
   text-offset: 0 30
+  margin: 5
+  margin-left: 8
 
   Item
     id: item
@@ -11,7 +13,7 @@ WikiItemBox < ScrollablePanel
     anchors.top: parent.top
     anchors.horizontalCenter: parent.horizontalCenter
     image-color: #ffffffff
-    margin-top: 3
+    margin-top: 15
 
   $checked on:
     border-color: #ffffff
@@ -140,15 +142,17 @@ MainWindow
     id: dataPanel
     width: 570
     margin-top: 15
+    margin-left: 5
+    padding: 3
     anchors.top: parent.top
     anchors.bottom: bottomSep.top
     anchors.right: parent.right
     vertical-scrollbar: dataPanelScroll
     layout:
       type: grid
-      cell-size: 102 90
+      cell-size: 110 90
       flow: true
-      auto-spacing: true
+      auto-spacing: false
   
   HorizontalSeparator
     id: bottomSep
